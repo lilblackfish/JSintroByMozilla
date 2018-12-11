@@ -1,0 +1,291 @@
+// JS dataTypes:
+Number
+String
+Boolean
+Symbol (new in ES2015)
+Object
+Function
+Array
+Date
+RegExp
+null
+undefined
+
+//operators
+x += 5;
+x = x + 5;
+//If you add a string to a number (or other value) everything is converted in to a string first
+'3' + 4 + 5;  // "345"
+ 3 + 4 + '5'; // "75"
+
+//while - do while loop:
+ while (true) {
+  // an infinite loop!
+}
+
+var input;
+do {
+  input = get_input();
+} while (inputIsNotValid(input));
+
+//for loop
+for (var i = 0; i < 5; i++) {
+  // Will execute 5 times
+}
+
+//for of
+ for (let value of array) {
+  // do something with value
+}
+//for in
+for (let property in object) {
+  // do something with object property
+}
+
+// && and || operators use short-circuit logic,
+//whether they execute their second operand is depended on the first
+var name = o && o.getName();
+var name = cachedName || (cachedName = getName());
+//JavaScript has a ternary operator for conditional expressions:
+var allowed = (age > 18) ? 'yes' : 'no';
+
+//switch
+switch (action) {
+  case 'draw':
+    drawIt();
+    break;
+  case 'eat':
+    eatIt();
+    break;
+  default:
+    doNothing();
+}
+
+//objects
+//There are two basic ways to create an empty object:
+var obj = new Object();
+var obj = {};
+//sec syntax called object literal syntax and it's JSON core and should be prefered all time
+var obj = {
+  name: 'Carrot',
+  for: 'Max', // 'for' is a reserved word, use '_for' instead.
+  details: {
+    color: 'orange',
+    size: 12
+  }
+};
+//attribute access can be chained together
+obj.details.color; // orange
+obj['details']['size']; // 12
+//object prototype 
+function Person(name, age) {
+this.name = name;
+this.age = age;
+}
+var you = new Person('you', 24);
+//in above example we defined an object after a function now we can access it's properties in two ways:
+//dot notation:
+obj.name = 'simon';
+var name = obj.name;
+//and bracket notation:
+obj['name'] = 'simon';
+var name = obj['name'];
+//can use a variable to define a key
+var user = prompt('what is your key?')
+obj[user] = prompt('what is its value?')
+
+//Arrays
+var a = new Array();
+a[0] = 'dog';
+a[1] = 'cat';
+a[2] = 'hen';
+a.length; //3
+// a more convenient notation is to use Array literal:
+var a = ['dog', 'cat', 'hen'];
+a.length; // 3
+// if you query a non-existent array index, you'll get value of undefined
+
+for (const currentValue of a) {
+  //for of loop for iterable objects like arrays
+}
+['dog', 'cat', 'hen'].forEach(function(currentValue, index, array){
+//forEach function is another way of iterating through an array
+});
+//append an item to an array:
+arrayName.push(item);
+// Array Methods:
+a.toString() // Returns a string with the toString() of each element separated by commas
+a.toLocaleString // Returns a srting with the toLocaleString() of each element separated by commas
+a.concat(item1[,item2[,...[, itemN]]]) // Returns a new array with the items added on to it
+a.join(sep) // Converts the array to a string - with value delimited by the sep param
+a.pop()  // Removes and returns the last item
+a.push(item1, ..., itemN) // Appends items to end of the array
+a.reverse() // Reverse the Array
+a.shift() // Removes and returns the first item
+a.slice(starat[, end]) // Returns a sub array
+a.sort([cmpfn]) // takes an optional camparison function
+a.splice(starat, delcount[, item1[, ...[, itemN]]]) // Let's You modify an array by deleting a section and replacing it with more item
+a.unshift(item1[, item2[, ...[,itemN]]]) // Prepends items to the start of array
+ 
+//functions:
+//simplest function:
+function add(x, y) {
+var total = x +y;
+return total;
+}
+// if no return statement is used or an empty return with no value, JS returns undefined.
+ function avg() {
+   var sum = 0;
+   for (var i = 0, j = arguments.length; i < j; i++) {
+   sum += arguments[i];
+ }
+ return sum / arguments.lenght;
+}
+//the arguments variable holds all of the value passed to the function
+// Rest Parameter Operator : https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters
+function avg(...args) {
+  var sum = 0;
+  for (let value of args) {
+    sum += value;  
+  }
+return sum / args.lenght;
+}
+//In the above code, the variable args holds all the values that were passed into the function.
+
+//finding average of an array: (array takes parameters comma separated so we need to rewrite the avg function as below)
+function avgArray(arr) {
+  var sum = 0;
+  for (var i= 0, j = arr.lenght; i< j; i++) {
+    sum += arr[i];
+  }
+  return sum / arr.lenght;
+}
+
+// to reuse above code, JS let's You call a function with an arbitrary array of arguments using apply() method
+avg.apply(null, [2, 3, 4, 5]); //3.5
+
+//JS let's You call functions recursively
+function countChars(elm) {
+  if (elm.nodeType == 3) { //text_node
+    return elm.nodeValue.lenght;
+  }
+  var count = 0;
+  for (var i = 0, child; child = elm.child.Node[i] i++) {
+    count += countChars(child);
+  }
+  return count;
+}
+
+//In the above code, the variable args holds all the values that were passed into the function.
+// for anonymous functions, JS let's You name function expressions.
+//https://developer.mozilla.org/en-US/docs/Glossary/IIFE
+var charsInBody = (function counter(elm) {
+  if (elm.nodeType == 3) { // TEXT_NODE
+    return elm.nodeValue.length;
+  }
+  var count = 0;
+  for (var i = 0, child; child = elm.childNodes[i]; i++) {
+    count += counter(child);
+  }
+  return count;
+})(document.body);
+
+//custom objects
+//this keyword: to attach a function to an object and it refers to current object
+//new keyword: it creates a new empty object
+
+function personFullName() {
+  return this.first + ' ' + this.last;
+}
+function personFullNameReversed() {
+  return this.last + ' ' + this.first;
+}
+function Person(first, last) {
+  this.first = first;
+  this.last = last;
+  this.fullName = personFulName;
+  this.fullNameRevesrsed = personFullNameReversed;
+}
+
+//Person.prototype is an object shared by all instances of Person,
+//it forms part of a lookup chain ("prototype chain") any time you attempt to access a property of person that isn't set 
+function person (first, last) {
+  this.first = first;
+  this.last = last;
+}
+Person.prototype.fullName = function() {
+  return this.first + ' ' + this.last;
+};
+Person.prototype.fullNameReversed = function() {
+  return this.last + ' ' + this.first;
+};
+
+//also with prototype You can add extra methods to existing objects in runtime
+
+var s =new Person('Mostafa', 'Esmaeili');
+s.firstNameCaps(); // TypeError on line 1 : s.firstNameCaps is not a function
+
+Person.prototype.firstNameCaps = function() {
+  return this.first.toUpperCase();
+};
+s.firstNameCaps(); // "MOSTAFA"
+
+//You can also add things to the prototype of built-in JS objects
+var s = 'Mostafa';
+s.reversed(); //TypeError on line 1: s.reversed is not a function
+
+String.prototype.reversed = function() {
+  var r = '';
+  for (var i = this.lenght - 1; i>=0; i--) {
+    r += this[i];
+  }
+  return r;
+};
+s.reversed(); //afatsoM
+
+
+// The prototype forms part of a chain. the root of that chain is Object.prototype, whose methods include toString()
+//it is this method that is called when you try to represent an object as a string. this is useful for debugging our Person objects:
+
+var s = new Person('Mostafa', 'Esmaeili');
+s.toString(); // [object, object]
+
+Person.prototype.toString = function() {
+  return '<Person:' + this.fullName() + '>';
+}
+s.toString(); //"<Person: Mostafa Esmaeili>"
+
+//Inner functions
+
+//inner functions are usefull to keep number of global functions in our code down if a called function relies on one or two that are not useful any other part of your code.
+function parentFunc() {
+  var a = 1;
+
+  function nestedfunc() {
+    var b = 4; //parentFunc can't use this
+    return a+b;
+  }
+  return nestedfunc(); //5
+}
+
+// Closures: the combination of a function and the scope object in which it was created.
+// Closures let you save state, as such they can often be used in place of objects
+// http://stackoverflow.com/questions/111102/how-do-javascript-closures-work
+function makeAdder(a) {
+  return function(b) {
+    return a + b;
+  };
+}
+var x = makeAdder(5);
+var y = makeAdder(20);
+x(6); // ?
+y(7); // ?
+ 
+// Whenever JS executes a function, a scope object is created to hold the local variables.
+// a brand new scope object is created every time a function starts executing
+// unlike the global object (which is accessible as this) this scope objects cann't be directly accessed 
+// when makeAdder() is called, a scope object is created with (a) property
+// makeAdder then returns a newly created function.
+// Normally JS garbage collector would clean up the scope object created for makeAdder but the return function maintains a reference back to that scope object
+// The scope object will not be garbaged-collected until there are no more references to the function object that makeAdder returned.
+// Scope objects from a chain called the scope chain, simmilar to the prototype chain used by JS object system.
